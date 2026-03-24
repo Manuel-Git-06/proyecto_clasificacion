@@ -7,6 +7,7 @@ import {
     addItemToBasketVisual,
     buildPlayerBaskets,
     flashZone,
+    flashZoneCorrect,
     getDomRefs,
     hideWinner,
     setOverlay,
@@ -504,6 +505,17 @@ function releaseByHand(handId) {
         // Wrong basket
         flashZone(zone.element, true);
         createEffect(item.x, item.y, '#f5bfbf', `¡No va aquí!`);
+
+        const topic = getActiveTopic();
+        const correctCategory = topic.categories[item.data.category];
+        if (correctCategory?.hint) {
+            showToast(domRefs, correctCategory.label, correctCategory.hint);
+        }
+
+        const correctZone = state.zones[zone.playerId]?.find((z) => z.id === item.data.category);
+        if (correctZone) {
+            flashZoneCorrect(correctZone.element);
+        }
 
         const launchX = (hand?.vx ?? 0) * APP_CONFIG.launchVelocityScale;
         const launchY = (hand?.vy ?? 0) * APP_CONFIG.launchVelocityScale;

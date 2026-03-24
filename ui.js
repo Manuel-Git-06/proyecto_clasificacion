@@ -69,7 +69,14 @@ export function buildPlayerBaskets(domRefs, topic) {
 
             basketInner.className = 'basket-items';
 
-            zone.append(basketInner, label, counter);
+            if (category.hint) {
+                const hint = document.createElement('span');
+                hint.className = 'basket-hint';
+                hint.textContent = category.hint;
+                zone.append(basketInner, label, hint, counter);
+            } else {
+                zone.append(basketInner, label, counter);
+            }
             container.appendChild(zone);
 
             zones[playerId].push({ id: category.id, element: zone, counterEl: counter, innerEl: basketInner });
@@ -145,6 +152,13 @@ export function flashZone(zoneElement, isError = false) {
         zoneElement.classList.remove('zone-flash');
         zoneElement.classList.remove('zone-error');
     }, 300);
+}
+
+export function flashZoneCorrect(zoneElement) {
+    zoneElement.classList.add('zone-flash', 'zone-correct');
+    window.setTimeout(() => {
+        zoneElement.classList.remove('zone-flash', 'zone-correct');
+    }, 600);
 }
 
 export function showToast(domRefs, title, message, isError = false) {

@@ -65,7 +65,7 @@ export default {
         { name: 'Loto', icon: '🪷', category: 'rizomas' },
 
         { name: 'Fresa', icon: '🍓', category: 'estolones' },
-        { name: 'Menta', icon: '🌿', category: 'estolones' },
+        { name: 'Menta', icon: '🍃', category: 'estolones' },
         { name: 'Cinta', icon: '🪴', category: 'estolones' },
         { name: 'Gramilla', icon: '🌾', category: 'estolones' }
     ]
