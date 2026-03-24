@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-eval' 'wasm-unsafe-eval' https://cdn.jsdelivr.net; style-src 'self'; img-src 'self' data: blob:; media-src 'self' blob:; connect-src 'self' https://cdn.jsdelivr.net; worker-src 'self' blob:; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
+    <title>Ciencias Naturales Interactivas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app">
+        <video id="input_video" autoplay playsinline muted></video>
+        <canvas id="hand_canvas"></canvas>
+        <canvas id="game_canvas"></canvas>
+
+        <div id="ui_layer">
+            <header id="header">
+                <div class="glass-panel score-panel" data-player="left">
+                    <span class="eyebrow">Estudiante A</span>
+                    <strong id="score_left">0 / —</strong>
+                </div>
+
+                <div class="glass-panel title-panel">
+                    <strong id="stage_name">Ciencias Naturales</strong>
+                    <span id="stage_hint">Selecciona un tema para comenzar</span>
+                </div>
+
+                <div class="glass-panel score-panel" data-player="right">
+                    <span class="eyebrow">Estudiante B</span>
+                    <strong id="score_right">0 / —</strong>
+                </div>
+            </header>
+
+            <div id="players_overlay">
+                <div class="player-lane left">Estudiante A</div>
+                <div class="player-lane right">Estudiante B</div>
+            </div>
+
+            <div id="baskets_row">
+                <div id="baskets_left" class="baskets-group"></div>
+                <div id="baskets_right" class="baskets-group"></div>
+            </div>
+        </div>
+
+        <div id="topic_select_overlay" class="overlay visible" role="main" aria-label="Selección de tema">
+            <div class="overlay-card topic-select-card">
+                <h1>Elige un tema</h1>
+                <p class="topic-select-subtitle">Ciencias Naturales</p>
+                <div id="topic_grid"></div>
+            </div>
+        </div>
+
+        <div id="status_overlay" class="overlay" role="status" aria-live="polite">
+            <div class="overlay-card">
+                <div class="loader" id="status_loader"></div>
+                <h1 id="status_title">Preparando actividad</h1>
+                <p id="status_message">Cargando cámara y seguimiento de manos...</p>
+                <div id="camera_selector" class="camera-selector" hidden>
+                    <label for="camera_select">Cámara</label>
+                    <select id="camera_select"></select>
+                </div>
+                <button id="start_button" type="button" hidden>Iniciar actividad</button>
+                <button id="retry_button" type="button" hidden>Reintentar</button>
+            </div>
+        </div>
+
+        <div id="winner_overlay" class="overlay" role="alert">
+            <div class="overlay-card winner-card">
+                <h1 id="winner_title">¡Victoria!</h1>
+                <p id="winner_message"></p>
+                <button id="replay_button" type="button">Jugar de nuevo</button>
+                <button id="change_topic_button" type="button">Cambiar tema</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="main.js"></script>
+</body>
+
+</html>
